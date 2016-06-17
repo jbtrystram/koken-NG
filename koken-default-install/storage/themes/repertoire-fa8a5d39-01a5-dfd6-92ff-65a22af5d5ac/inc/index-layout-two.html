@@ -1,0 +1,97 @@
+<div class="four columns">
+
+	<div class="home-essays">
+
+		<koken:load source="{{ settings.index_show_feat }}" limit="{{ settings.index_essays_num }}">
+
+			<koken:loop>
+
+				<section>
+
+					<koken:if true="settings.index_show_essays_feat">
+
+						<koken:featured_image>
+							<koken:link title="Read {{ essay.title }}"><koken:img size="16:9" /></koken:link>
+						</koken:featured_image>
+
+					</koken:if>
+
+					<koken:if true="settings.index_show_essays_date"><span class="meta"><koken:time /></span></koken:if>
+					<h3><koken:link title="Read {{ essay.title }}">{{ essay.title }}</koken:link></h3>
+					<p>{{ essay.excerpt truncate="160" }} <koken:link title="Read {{ essay.title }}">more</koken:link></p>
+
+				</section>
+
+			</koken:loop>
+
+		<koken:else>
+
+			<koken:note>
+				<strong>No essays found.</strong> You will need to publish at least one essay for this column to be used. You may remove this column or change the type of essays displayed through the theme settings panel.
+			</koken:note>
+
+		</koken:load>
+
+	</div>
+
+</div>
+
+<div class="twelve columns">
+
+	<koken:load source="featured_albums">
+
+		<koken:shift>
+
+			<div class="home-slideshow">
+
+				<koken:pulse data="album.covers" crop="fill" link_to="album" can_link_to_album="true" transition_type="slide" />
+
+			</div>
+
+			<div class="album-meta">
+
+				<koken:if true="settings.index_show_album_title"><h3><koken:link title="{{ album.title }}">{{ album.title }}</koken:link></h3></koken:if>
+
+				<koken:if true="settings.index_show_album_summary">
+					{{ album.summary paragraphs="true" }}
+				</koken:if>
+
+			</div>
+
+		</koken:shift>
+
+		<div id="home-albums">
+
+			<koken:loop>
+
+				<div class="six columns alpha omega">
+
+					<koken:link title="View {{ album.title }}" class="img">
+						<koken:img size="10:6" class="acover" />
+					</koken:link>
+
+					<div class="album-meta">
+
+						<koken:if true="settings.index_show_album_title"><h3><koken:link title="View {{ album.title }}">{{ album.title }}</koken:link></h3></koken:if>
+
+						<koken:if true="settings.index_show_album_summary">
+							{{ album.summary paragraphs="true" }}
+						</koken:if>
+
+					</div>
+
+				</div>
+
+			</koken:loop>
+
+		</div>
+
+		<koken:else>
+
+			<koken:note>
+				<strong>No featured albums found.</strong> Create some in the Library.
+			</koken:note>
+
+	</koken:load>
+
+</div>

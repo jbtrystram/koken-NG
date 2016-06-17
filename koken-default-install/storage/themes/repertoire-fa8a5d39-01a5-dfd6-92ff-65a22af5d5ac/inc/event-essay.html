@@ -1,0 +1,111 @@
+<koken:event_essay>
+
+	<div class="row scroll-me">
+
+		<div class="four columns">
+
+			<aside>
+
+				<h4>Published</h4>
+				<p>
+					<span class="meta">
+						<koken:link to="date">
+							<koken:time relative="{{ settings.show_event_date_relative }}" />
+						</koken:link>
+					</span>
+				</p>
+
+				<koken:if true="{{ settings.event_show_tags }}">
+
+					<koken:tags>
+						<h4>{{ labels.tag.plural }}</h4>
+						<p>
+							<span class="meta">
+								<koken:loop separator="&nbsp;">
+									<koken:link class="tag" to="tag" title="View everything in {{ tag.title }}">
+										{{ tag.title }}
+									</koken:link>
+								</koken:loop>
+							</span>
+						</p>
+					</koken:tags>
+
+				</koken:if>
+
+				<koken:if true="{{ settings.event_show_cats }}">
+
+					<koken:categories>
+						<h4>{{ labels.category.plural }}</h4>
+						<p>
+							<span class="meta">
+								<koken:loop separator=", ">
+									<koken:link class="norm" to="category" title="View everything in {{ category.title }}">
+										{{ category.title }}
+									</koken:link>
+								</koken:loop>
+							</span>
+						</p>
+					</koken:categories>
+
+				</koken:if>
+
+				<koken:if true="{{ settings.event_show_share }}">
+
+					<h4>Share</h4>
+					<koken:include file="inc/share-links.html" />
+
+				</koken:if>
+
+				<koken:if true="settings.show_comment_counts">
+
+					<koken:discussion_count>
+
+						<p>
+							<span class="meta comment_count">{{ discussion_count }}</span>
+						</p>
+
+					</koken:discussion_count>
+
+				</koken:if>
+
+			</aside>
+
+		</div>
+
+		<div class="twelve columns">
+
+			<div class="event">
+
+				<koken:featured_image>
+
+					<div class="media">
+
+						<koken:link title="View {{ essay.title }}">
+
+							<koken:img lazy="true" />
+
+						</koken:link>
+
+					</div>
+
+				</koken:featured_image>
+
+				<div class="event-data">
+
+					<h3>
+						<koken:link title="View {{ essay.title }}">
+							{{ essay.title }}
+						</koken:link>
+					</h3>
+
+					{{ essay.content truncate="600" paragraphs="true" }} <koken:link title="View {{ essay.title }}">more</koken:link>
+
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+</koken:event_essay>

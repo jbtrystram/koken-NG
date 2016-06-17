@@ -1,0 +1,103 @@
+<koken:include file="inc/header.html" />
+
+<div id="essays-index" class="essay-page">
+
+<koken:load limit="{{ settings.essays_index_limit }}">
+
+	<koken:head>
+		<meta property="og:site_name" content="{{ site.title }}" />
+		<meta property="og:description" content="{{ site.description strip_html='true' }}" />
+		<meta property="og:title" content="{{ labels.essay.plural }}" />
+		<meta property="og:type" content="blog" />
+		<meta property="og:url" content="{{ location.site_url }}{{ location.here }}" />
+	</koken:head>
+
+	<koken:variable name="list" value="true" />
+
+	<div class="row">
+
+		<div class="four columns">&nbsp;</div>
+
+		<div class="twelve columns">
+
+			<span class="meta">
+				{{ labels.essay.plural }} / {{ archive.type }} / {{ archive.title }}
+			</span>
+
+			<br><br>
+
+		</div>
+
+	</div>
+
+	<koken:loop>
+
+		<article>
+
+			<div class="row">
+
+				<div class="four columns">&nbsp;</div>
+
+				<div class="twelve columns">
+
+					<header>
+						<h1>
+							<koken:link title="View {{ essay.title }}">
+								{{ essay.title }}
+							</koken:link>
+						</h1>
+					</header>
+
+				</div>
+
+			</div>
+
+			<div class="row">
+
+				<div class="four columns">
+
+					<koken:include file="inc/article-aside.html" />
+
+				</div>
+
+				<div class="twelve columns">
+
+					<div class="article-body">
+						{{ essay.content }}
+					</div>
+
+					<footer></footer>
+
+				</div>
+
+			</div>
+
+		</article>
+
+	</koken:loop>
+
+	<div class="row">
+
+		<div class="four columns">&nbsp;</div>
+
+		<div class="twelve columns">
+
+			<koken:include file="inc/pagination.html" />
+
+		</div>
+
+	</div>
+
+	<koken:else>
+
+		<koken:note>
+
+			<strong>No essays found.</strong> Create some in Text.
+
+		</koken:note>
+
+</koken:load>
+
+</div>
+
+<koken:include file="inc/footer.html" />

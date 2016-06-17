@@ -1,0 +1,133 @@
+<koken:include file="inc/header.html" />
+
+<div id="essays-detail" class="essay-page">
+
+<koken:load>
+
+	<koken:head>
+		<meta property="og:site_name" content="{{ site.title }}" />
+		<meta property="og:title" content="{{ essay.title strip_html='true' }}" />
+		<meta property="og:description" content="{{ essay.excerpt strip_html='true' }}" />
+		<meta property="og:url" content="{{ essay.url }}" />
+		<meta property="og:type" content="website" />
+		<koken:featured_image>
+		<meta property="og:image" content="{{ content.presets.medium_large.url }}" />
+		<meta property="og:image:width" content="{{ content.presets.medium_large.width }}" />
+		<meta property="og:image:height" content="{{ content.presets.medium_large.height }}" />
+		</koken:featured_image>
+		<meta name="medium" content="article" />
+		<koken:not empty="profile.twitter">
+			<koken:featured_image>
+			<meta name="twitter:card" content="summary_large_image" />
+			<meta name="twitter:site" content="@{{ profile.twitter }}" />
+			<meta name="twitter:creator" content="@{{ profile.twitter }}" />
+			<meta name="twitter:image" content="{{ content.presets.medium_large.url }}" />
+			</koken:featured_image>
+		</koken:not>
+	</koken:head>
+
+	<div class="row">
+		<div class="sixteen columns">
+			<ul class="neighbor-links">
+				<koken:previous>
+					<li>
+						<koken:link class="pag">&larr;&nbsp;&nbsp;Newer</koken:link>
+					</li>
+				</koken:previous>
+				<koken:next>
+					<li>
+						<koken:link class="pag">Older&nbsp;&nbsp;&rarr;</koken:link>
+					</li>
+				</koken:next>
+			</ul>
+		</div>
+	</div>
+
+	<article>
+
+		<div class="row">
+
+			<div class="four columns">&nbsp;</div>
+
+			<div class="twelve columns">
+
+				<header>
+					<h1>
+						<koken:link title="View {{ essay.title }}">
+							{{ essay.title }}
+						</koken:link>
+					</h1>
+				</header>
+
+			</div>
+
+		</div>
+
+		<div class="row">
+
+			<div class="four columns">
+
+				<koken:include file="inc/article-aside.html" />
+
+			</div>
+
+			<div class="twelve columns">
+
+				<div class="article-body">
+					{{ essay.content }}
+				</div>
+
+				<footer>
+
+					<koken:link title="Link to {{ essay.title }}">Permalink</koken:link>
+
+				</footer>
+
+				<div class="essay-pag">
+					<ul>
+						<li>
+							<span class="cell left">
+								<koken:next>
+									<koken:link title="Read {{ essay.title }}" class="title">&larr;&nbsp;&nbsp;{{ essay.title truncate="60" }}</koken:link>
+									<p>
+										<span class="meta"><koken:time />&nbsp;&nbsp;</span>{{ essay.excerpt }} <koken:link title="Read {{ essay.title }}">more</koken:link>
+									</p>
+								</koken:next>
+							</span>
+							<span class="cell right">
+								<koken:previous>
+									<koken:link title="Read {{ essay.title }}" class="title">{{ essay.title truncate="60" }}&nbsp;&nbsp;&rarr;</koken:link>
+									<p>
+										<span class="meta"><koken:time />&nbsp;&nbsp;</span>{{ essay.excerpt }} <koken:link title="Read {{ essay.title }}">more</koken:link>
+									</p>
+								</koken:previous>
+							</span>
+						</li>
+					</ul>
+				</div>
+
+				<koken:if true="settings.show_disc_essay">
+
+					<div id="kdiscuss">
+
+						<koken:discussion>
+
+							{{ discussion }}
+
+						</koken:discussion>
+
+					</div>
+
+				</koken:if>
+
+			</div>
+
+		</div>
+
+	</article>
+
+</koken:load>
+
+</div>
+
+<koken:include file="inc/footer.html" />

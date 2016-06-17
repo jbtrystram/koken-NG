@@ -1,0 +1,57 @@
+<div class="sixteen columns">
+
+	<koken:load source="featured_albums">
+
+		<koken:shift>
+
+			<div class="home-slideshow">
+
+				<koken:pulse data="album.covers" size="10:6" crop="fill" link_to="album" can_link_to_album="true" transition_type="slide" />
+
+			</div>
+
+			<div class="album-meta">
+
+				<koken:if true="settings.index_show_album_title"><h3><koken:link title="View {{ album.title }}">{{ album.title }}</koken:link></h3></koken:if>
+
+				<koken:if true="settings.index_show_album_summary">
+					{{ album.summary paragraphs="true" }}
+				</koken:if>
+
+			</div>
+
+		</koken:shift>
+
+		<div id="home-albums-three">
+
+			<koken:loop>
+
+				<div class="one-third column alpha omega">
+
+					<koken:link title="View {{ album.title }}" class="img">
+						<koken:img size="10:6" class="acover" />
+					</koken:link>
+
+					<div class="album-meta">
+
+						<koken:if true="settings.index_show_album_title"><h3><koken:link title="View {{ album.title }}">{{ album.title }}</koken:link></h3></koken:if>
+
+						<koken:if true="settings.index_show_album_summary">
+							{{ album.summary paragraphs="true" }}
+						</koken:if>
+
+					</div>
+
+				</div>
+
+			</koken:loop>
+
+		</div>
+
+		<koken:else>
+
+		This home page layout requires featured albums. Add some in the Library.
+
+	</koken:load>
+
+</div>

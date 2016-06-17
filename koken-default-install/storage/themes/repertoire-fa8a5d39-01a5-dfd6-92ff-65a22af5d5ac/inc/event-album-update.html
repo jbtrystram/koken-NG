@@ -1,0 +1,134 @@
+<koken:event_album_update>
+
+	<div class="row scroll-me">
+
+		<div class="four columns">
+
+			<aside>
+
+				<h4>Published</h4>
+				<p>
+					<span class="meta">
+						<koken:link to="date">
+							<koken:time relative="{{ settings.show_event_date_relative }}" />
+						</koken:link>
+					</span>
+				</p>
+
+				<koken:if true="{{ settings.event_show_tags }}">
+
+					<koken:tags>
+						<h4>{{ labels.tag.plural }}</h4>
+						<p>
+							<span class="meta">
+								<koken:loop separator="&nbsp;">
+									<koken:link class="tag" to="tag" title="View everything in {{ tag.title }}">
+										{{ tag.title }}
+									</koken:link>
+								</koken:loop>
+							</span>
+						</p>
+					</koken:tags>
+
+				</koken:if>
+
+				<koken:if true="{{ settings.event_show_cats }}">
+
+					<koken:categories>
+						<h4>{{ labels.category.plural }}</h4>
+						<p>
+							<span class="meta">
+								<koken:loop separator=", ">
+									<koken:link class="norm" to="category" title="View everything in {{ category.title }}">
+										{{ category.title }}
+									</koken:link>
+								</koken:loop>
+							</span>
+						</p>
+					</koken:categories>
+
+				</koken:if>
+
+				<koken:if true="{{ settings.event_show_share }}">
+
+					<h4>Share</h4>
+					<koken:include file="inc/share-links.html" />
+
+				</koken:if>
+
+			</aside>
+
+		</div>
+
+		<div class="twelve columns">
+
+			<div class="event">
+
+				<koken:if data="settings.album_update_time_type" equals="mosaic">
+
+					<div class="media">
+
+						<koken:link filter:order_by="published_on" filter:year="{{ date date_format='Y' }}" filter:month="{{ date date_format='m' }}" filter:day="{{ date date_format='d' }}" title="View {{ album.title }}">
+							<koken:if condition="{{ content.length }} === 1">
+								<koken:img lazy="true" />
+							<koken:else>
+								<ul class="k-mosaic k-mosaic-{{ settings.mosaic_cols }} edge">
+									<koken:loop limit="{{ settings.mosaic_cols * settings.mosaic_rows }}">
+										<koken:background tag="li"></koken:background>
+									</koken:loop>
+								</ul>
+							</koken:if>
+						</koken:link>
+
+					</div>
+
+				</koken:if>
+
+				<koken:if data="settings.album_update_time_type" equals="slideshow">
+
+					<div class="media">
+
+						<koken:pulse group="timeline-albums" data="album.covers" link_to="album" />
+
+					</div>
+
+				</koken:if>
+
+				<koken:if data="settings.album_update_time_type" equals="images">
+
+					<koken:loop>
+
+						<div class="media">
+
+							<koken:link title="View {{ album.title }}">
+
+								<koken:img lazy="true" />
+
+							</koken:link>
+
+						</div>
+
+					</koken:loop>
+
+				</koken:if>
+
+				<div class="event-data">
+
+					<h3>
+						<koken:link title="View {{ album.title }}">
+							{{ album.title }}
+							 <span>({{ content.length }} new {{ content.length plural="items" singular="item" }})</span>
+						</koken:link>
+					</h3>
+
+					{{ album.summary | album.description paragraphs="true" }}
+
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+</koken:event_album_update>

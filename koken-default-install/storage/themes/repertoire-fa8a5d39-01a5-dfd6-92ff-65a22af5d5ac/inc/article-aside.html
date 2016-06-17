@@ -1,0 +1,80 @@
+<aside>
+
+	<koken:if true="settings.essays_show_year">
+		<h4>Published</h4>
+		<p>
+			<span class="meta">
+				<koken:time />
+			</span>
+		</p>
+	</koken:if>
+
+	<koken:if true="settings.essays_show_categories">
+		<koken:topics>
+			<div id="essay_topics">
+				<h4>Topic</h4>
+				<p>
+					<span class="meta">
+						<koken:loop separator=", ">
+							<koken:link title="View {{ album.title }}">
+								{{ album.title }}
+							</koken:link>
+						</koken:loop>
+					</span>
+				</p>
+			</div>
+		</koken:topics>
+		<koken:categories>
+			<div id="essay_categories">
+				<h4>{{ labels.category.plural }}</h4>
+				<p>
+					<span class="meta">
+						<koken:loop separator=", ">
+								<koken:link title="View all {{ labels.essay.plural case='lower' }} in {{ category.title }}">
+								{{ category.title }}
+							</koken:link>
+						</koken:loop>
+					</span>
+				</p>
+			</div>
+		</koken:categories>
+		<koken:tags>
+			<div id="essay_tags">
+				<h4>{{ labels.tag.plural }}</h4>
+				<p>
+					<span class="meta">
+						<koken:loop separator=", ">
+							<koken:link title="View all {{ labels.essay.plural case='lower' }} in {{ tag.title }}">
+								{{ tag.title }}
+							</koken:link>
+						</koken:loop>
+					</span>
+				</p>
+			</div>
+		</koken:tags>
+	</koken:if>
+
+	<koken:if true="settings.social_bttns_show_one">
+		<h4>Share</h4>
+		<koken:include file="inc/share-links.html" />
+	</koken:if>
+
+	<koken:if true="settings.essays_show_count">
+
+		<koken:if true="list">
+
+			<koken:discussion_count>
+
+				<div id="essay_comment_count">
+
+					<p class="comment_count"><span class="meta">{{ discussion_count }}</span></p>
+
+				</div>
+
+			</koken:discussion_count>
+
+		</koken:if>
+
+	</koken:if>
+
+</aside>

@@ -1,0 +1,187 @@
+<koken:include file="inc/header.html" />
+
+<koken:load>
+
+	<koken:head>
+		<meta property="og:site_name" content="{{ site.title }}" />
+		<meta property="og:title" content="{{ content.title|content.filename strip_html="true" }}" />
+		<meta property="og:description" content="{{ content.caption strip_html="true" }}" />
+		<meta property="og:type" content="website" />
+		<meta property="og:image" content="{{ content.presets.medium_large.url }}" />
+		<meta property="og:image:width" content="{{ content.presets.medium_large.width }}" />
+		<meta property="og:image:height" content="{{ content.presets.medium_large.height }}" />
+		<meta property="og:url" content="{{ content.url }}" />
+		<koken:content_image>
+			<koken:not empty="profile.twitter">
+				<meta name="twitter:card" content="photo" />
+				<meta name="twitter:site" content="@{{ profile.twitter }}" />
+				<meta name="twitter:creator" content="@{{ profile.twitter }}" />
+			</koken:not>
+		</koken:content_image>
+	</koken:head>
+
+	<div id="content-detail">
+
+		<div class="row">
+			<div class="twelve columns">
+				<h1>
+					<koken:if true="settings.content_title_file">
+						{{ content.filename.clean case="title" }}
+					<koken:else>
+						{{ content.title | content.filename }}
+					</koken:if>
+				</h1>
+			</div>
+			<div class="four columns">
+				<ul class="neighbor-links">
+					<koken:previous>
+						<koken:link title="Previous: {{ content.title }}"><li>
+						&larr;&nbsp;</koken:link>
+					</li>
+					</koken:previous>
+					<koken:next>
+						<li>
+						<koken:link title="Next: {{ content.title }}">&nbsp;&rarr;</koken:link>
+						</li>
+					</koken:next>
+				</ul>
+			</div>
+
+		</div>
+
+		<div class="row">
+
+			<div class="sixteen columns">
+
+				<koken:content_image>
+
+					<div class="img-wrap">
+
+						<koken:if true="settings.show_img_spinner">
+
+							<koken:img lazy="true" />
+
+						<koken:else>
+
+							<koken:img lazy="true" class="nospin" />
+
+						</koken:if>
+
+					</div>
+
+				</koken:content_image>
+
+				<koken:content_video>
+
+					<div class="img-wrap">
+						<koken:video />
+					</div>
+
+				</koken:content_video>
+
+				<div class="event-data">
+
+					<koken:if true="settings.albumd_show_title">
+						<h3>
+							<koken:if true="settings.content_title_file">
+								{{ content.filename.clean case="title" }}
+							<koken:else>
+								{{ content.title | content.filename }}
+							</koken:if>
+						</h3>
+					</koken:if>
+					<koken:if true="settings.albumd_show_caption">
+						<koken:not empty="content.caption">
+							{{ content.caption paragraphs="true" }}
+						</koken:not>
+					</koken:if>
+
+				</div>
+
+			</div>
+
+		</div>
+
+		<div class="row">
+
+			<div class="four columns">
+
+				<h4>Captured</h4>
+				<p>
+					<span class="meta">
+						<koken:time />
+					</span>
+				</p>
+
+				<koken:exif>
+					<h4>EXIF</h4>
+					<p>
+						<span class="meta">
+							{{ exif.aperture }}
+							{{ exif.exposure }}
+							{{ exif.focal_length }}
+							{{ exif.iso_speed_ratings }}
+						</span>
+					</p>
+
+				</koken:exif>
+
+				<koken:categories>
+					<h4>{{ labels.category.plural }}</h4>
+					<p>
+						<span class="meta">
+							<koken:loop separator=", ">
+								<koken:link title="View all {{ labels.content.plural case='lower' }} in {{ category.title }}">
+									{{ category.title }}
+								</koken:link>
+							</koken:loop>
+						</span>
+					</p>
+				</koken:categories>
+
+				<koken:tags>
+					<h4>{{ labels.tag.plural }}</h4>
+					<p>
+						<span class="meta">
+							<koken:loop separator=", ">
+								<koken:link title="View all {{ labels.content.plural case='lower' }} in {{ tag.title }}">
+									{{ tag.title }}
+								</koken:link>
+							</koken:loop>
+						</span>
+					</p>
+				</koken:tags>
+
+				<koken:max_download>
+					<h4>Download</h4>
+					<p>
+						<span class="meta">
+							<koken:link title="Download {{ max_download.width }}x{{ max_download.height }} image">
+								{{ max_download.width }}x{{ max_download.height }}
+							</koken:link>
+						</span>
+					</p>
+				</koken:max_download>
+
+				<koken:if true="settings.social_bttns_show_one">
+					<h4>Share</h4>
+					<koken:include file="inc/share-links.html" />
+				</koken:if>
+
+			</div>
+
+			<div class="twelve columns">
+
+				<div class="detail-text">
+					{{ content.caption paragraphs="true" }}
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+</koken:load>
+
+<koken:include file="inc/footer.html" />

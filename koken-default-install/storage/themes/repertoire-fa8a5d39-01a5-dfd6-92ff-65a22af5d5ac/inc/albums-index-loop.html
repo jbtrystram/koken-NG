@@ -1,0 +1,112 @@
+<koken:loop>
+
+	<div class="row scroll-me">
+
+		<div class="sixteen columns">
+
+			<div id="pulse_links_{{ album.id }}" class="pulse-links">
+				<a href="#" id="sldshw-prev-{{ album.id }}" title="Previous">Previous</a>&nbsp;/&nbsp;<a href="#" id="sldshw-next-{{ album.id }}" title="Next">Next</a>&nbsp;&nbsp;<div class="pulse-count"><span id="pulse_count_{{ album.id }}"></span> of <span id="pulse_total_{{ album.id }}"></span></div>
+			</div>
+
+			<div class="pulse">
+
+				<koken:pulse jsvar="pulse_{{ album.id }}" can_link_to_album="true" data="album.covers" link_to="album" crop="fill" size="2:1" next="#sldshw-next-{{ album.id }}" previous="#sldshw-prev-{{ album.id }}" transition_type="slide" autostart="false" />
+
+			</div>
+
+			<script>
+				pulse_{{ album.id }}.on( 'transitionstart dataloaded', function(e,t) {
+					switch(t) {
+
+						case 'transitionstart' :
+							document.getElementById('pulse_links_{{ album.id }}').style.display = 'block';
+							document.getElementById('pulse_count_{{ album.id }}').innerHTML = e.data.index + 1;
+							break;
+
+						case 'dataloaded' :
+							document.getElementById('pulse_total_{{ album.id }}').innerHTML = e.items.length;
+							break;
+
+					}
+				});
+			</script>
+
+		</div>
+
+	</div>
+
+	<div class="row">
+
+		<div class="four columns">
+
+			<h2><koken:link title="View {{ album.title }}">{{ album.title }}</koken:link></h2>
+
+		</div>
+
+		<div class="one column">
+
+			&nbsp;
+
+		</div>
+
+		<div class="eleven columns">
+
+			<p>{{ album.summary }}</p>
+
+			<koken:if true="settings.albumd_show_categories">
+
+				<div class="album-meta">
+
+					<koken:categories>
+
+						<div>
+
+							<h4>{{ labels.category.plural }}</h4>
+
+							<span class="meta">
+
+							<koken:loop separator=", ">
+								<koken:link title="View all {{ labels.album.plural case='lower' }} in {{ category.title }}">
+									{{ category.title }}
+								</koken:link>
+							</koken:loop>
+
+							</span>
+
+						</div>
+
+					</koken:categories>
+
+					<koken:tags>
+
+						<div>
+
+							<h4>{{ labels.tag.plural }}</h4>
+
+							<span class="meta">
+
+							<koken:loop separator=", ">
+								<koken:link title="View all {{ labels.album.plural case='lower' }} in {{ tag.title }}">
+									{{ tag.title }}
+								</koken:link>
+							</koken:loop>
+
+							</span>
+
+						</div>
+
+					</koken:tags>
+
+				</div>
+
+			</koken:if>
+
+		</div>
+
+	</div>
+
+	<div class="row spacer">
+		<div class="sixteen columns"></div>
+	</div>
+
+</koken:loop>
