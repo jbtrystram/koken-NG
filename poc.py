@@ -1,6 +1,10 @@
 from html.parser import HTMLParser
 import re
 
+# TEMP
+import os
+os.chdir('koken-default-install/storage/themes/repertoire-fa8a5d39-01a5-dfd6-92ff-65a22af5d5ac/')
+
 data = {'featured_albums': [{'album': {'title': 'MON ALBUM'}}]}
 settings = {'settings': {'index_layout': 'one'}, 'site': {'title': 'MON SITE'}}
 
